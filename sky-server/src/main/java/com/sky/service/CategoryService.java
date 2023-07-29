@@ -42,7 +42,7 @@ public interface CategoryService {
      * @param status
      * @param id
      */
-    void startOrStop(Integer status, Long id);
+    void activateOrDeactivate(Integer status, Long id);
 
 
     /**
