@@ -32,4 +32,6 @@ public interface EmployeeMapper {
      * 比较简单的sql语句可以想上面那样直接用注解，复杂的还是用xml文件写
      */
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    void update(Employee employee);
 }
