@@ -127,4 +127,32 @@ public class EmployeeController {
         employeeService.activateOrDeactivate(status, id);
         return Result.success();
     }
+
+
+    /*
+     * 根据id查询员工信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工信息")
+    public Result<Employee> getById(@PathVariable Long id) {
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
+
+
+    /*
+     * employeeDTO 存放了最新的值，我们要把它更新到数据库中
+     * 因为前端是在 request body传入多个参数，所以需要 @RequestBody 接收json数据
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("编辑员工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("编辑员工信息: {}", employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
 }

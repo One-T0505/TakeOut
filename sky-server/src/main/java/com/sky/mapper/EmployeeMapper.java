@@ -33,5 +33,20 @@ public interface EmployeeMapper {
      */
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
+
+    /**
+     * 启用禁用员工账号，传入的employee只有status和id有值，根据id找到对应的记录并把状态更新为status值
+     * @param employee
+     * @return
+     */
     void update(Employee employee);
+
+
+    /**
+     * 根据id查询员工信息
+     * @param id
+     * @return
+     */
+    @Select("select * from employee where id = #{id}")
+    Employee getById(Long id);
 }
