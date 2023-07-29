@@ -1,7 +1,10 @@
 package com.sky.service.impl;
 
 import com.sky.constant.MessageConstant;
+import com.sky.constant.PasswordConstant;
 import com.sky.constant.StatusConstant;
+import com.sky.context.BaseContext;
+import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.entity.Employee;
 import com.sky.exception.AccountLockedException;
@@ -9,11 +12,16 @@ import com.sky.exception.AccountNotFoundException;
 import com.sky.exception.PasswordErrorException;
 import com.sky.mapper.EmployeeMapper;
 import com.sky.service.EmployeeService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import java.time.LocalDateTime;
+
 @Service
+@Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
@@ -55,6 +63,41 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //3、返回实体对象
         return employee;
+    }
+
+
+    /**
+     * 新增员工
+     * 当传入的前端传过来的数据并不能和实体类完全对应的时候，会用到DTO相关模型
+     * 需要将DTO类转换成和java完全对应的实体类
+     * @param employeeDTO
+     * @return
+     */
+    @Override
+    public void save(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        // employeeDTO中的属性名和Employee类的重复，如果我们一个一个复制太慢了
+        // spring提供了 BeanUtils类快速拷贝属性值
+        // 但前提是 employeeDTO 的属性名 和 Employee类的属性名相同才能快速拷贝
+        BeanUtils.copyProperties(employeeDTO, employee);
+
+        // 完成 Employee 类剩下属性的赋值
+
+        // 设置新建账号的状态，默认为正常
+        employee.setStatus(StatusConstant.ENABLE);
+        // 新建账号密码默认为123456，但是存在数据库里必须存其MD5加密后的结果
+        employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
+        // 设置当前记录的创建时间和修改时间
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+        // 设置当前记录的创建人id和修改人id
+        employee.setCreateUser(BaseContext.getCurrentId());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+
+        // 其实上面的步骤就是在给新创建的 employee 实例的属性赋值
+
+        // 插入数据库
+        employeeMapper.insert(employee);
     }
 
 }
