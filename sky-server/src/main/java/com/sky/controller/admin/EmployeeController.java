@@ -3,8 +3,10 @@ package com.sky.controller.admin;
 import com.sky.constant.JwtClaimsConstant;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
+import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
+import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.EmployeeService;
 import com.sky.utils.JwtUtil;
@@ -13,10 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -90,6 +89,25 @@ public class EmployeeController {
 
         employeeService.save(employeeDTO);
         return Result.success();
+    }
+
+
+    /*
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     *
+     * 查看了接口文档，发现该接口以query方式发送请求，所以形参不需要@RequestBody
+     * 只有前端发送的是json数据才需要
+     * query方式就是在url上以键值对形式给出  我们用 employeePageQueryDTO 对象，
+     * 该对象的属性名全部和query的参数名一样，所以可以自动匹配上
+     */
+    @GetMapping("/page")
+    @ApiOperation("员工分页查询")
+    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO ){
+        log.info("员工分页查询: {}", employeePageQueryDTO);
+        PageResult  pageResult = employeeService.pageQuery(employeePageQueryDTO);
+        return Result.success(pageResult);
     }
 
 }

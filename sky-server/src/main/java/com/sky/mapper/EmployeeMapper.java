@@ -1,5 +1,7 @@
 package com.sky.mapper;
 
+import com.github.pagehelper.Page;
+import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,4 +23,13 @@ public interface EmployeeMapper {
             "values" +
             "(#{name},#{username},#{password},#{phone},#{sex},#{idNumber},#{createTime},#{updateTime},#{createUser},#{updateUser},#{status})")
     void insert(Employee employee);
+
+
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     * 比较简单的sql语句可以想上面那样直接用注解，复杂的还是用xml文件写
+     */
+    Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 }

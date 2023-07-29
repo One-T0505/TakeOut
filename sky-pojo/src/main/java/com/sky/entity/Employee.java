@@ -32,6 +32,9 @@ public class Employee implements Serializable {
 
     private Integer status;
 
+    // 这两个属性为 LocalDateTime，如果不做格式转换，在前端页面上显示就会怪怪的
+    // 使用如下注解只能单独对这一个属性做转换，没办法批量做转换，所以不推荐这种注解的方法
+
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
