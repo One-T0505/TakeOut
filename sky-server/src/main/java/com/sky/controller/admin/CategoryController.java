@@ -38,6 +38,7 @@ public class CategoryController {
         return Result.success();
     }
 
+
     /**
      * 分类分页查询
      * @param categoryPageQueryDTO
@@ -50,6 +51,7 @@ public class CategoryController {
         PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
         return Result.success(pageResult);
     }
+
 
     /**
      * 删除分类
@@ -64,6 +66,7 @@ public class CategoryController {
         return Result.success();
     }
 
+
     /**
      * 修改分类
      * @param categoryDTO
@@ -75,6 +78,7 @@ public class CategoryController {
         categoryService.update(categoryDTO);
         return Result.success();
     }
+
 
     /**
      * 启用、禁用分类
@@ -88,6 +92,7 @@ public class CategoryController {
         categoryService.startOrStop(status,id);
         return Result.success();
     }
+
 
     /**
      * 根据类型查询分类

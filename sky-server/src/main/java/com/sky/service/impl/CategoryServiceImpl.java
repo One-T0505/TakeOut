@@ -56,6 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryMapper.insert(category);
     }
 
+
     /**
      * 分页查询
      * @param categoryPageQueryDTO
@@ -67,6 +68,7 @@ public class CategoryServiceImpl implements CategoryService {
         Page<Category> page = categoryMapper.pageQuery(categoryPageQueryDTO);
         return new PageResult(page.getTotal(), page.getResult());
     }
+
 
     /**
      * 根据id删除分类
@@ -91,6 +93,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryMapper.deleteById(id);
     }
 
+
     /**
      * 修改分类
      * @param categoryDTO
@@ -106,6 +109,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryMapper.update(category);
     }
 
+
     /**
      * 启用、禁用分类
      * @param status
@@ -120,6 +124,7 @@ public class CategoryServiceImpl implements CategoryService {
                 .build();
         categoryMapper.update(category);
     }
+
 
     /**
      * 根据类型查询分类
