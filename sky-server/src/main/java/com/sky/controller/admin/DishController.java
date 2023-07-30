@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * ymy
  * 2023/7/30 - 13 : 39
@@ -48,5 +50,13 @@ public class DishController {
         log.info("分页查询菜品: {}", dishPageQueryDTO);
         PageResult pageResult = dishService.pageQuery(dishPageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    @DeleteMapping
+    @ApiOperation("批量删除菜品")
+    public Result<String> delete(@RequestParam List<Long> ids){
+        log.info("删除菜品: {}", ids);
+        dishService.deleteBatch(ids);
+        return Result.success("删除菜品成功");
     }
 }
