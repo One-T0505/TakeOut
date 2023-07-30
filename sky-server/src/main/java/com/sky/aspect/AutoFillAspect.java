@@ -6,7 +6,6 @@ import com.sky.context.BaseContext;
 import com.sky.enumeration.OperationType;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -21,6 +20,9 @@ import java.time.LocalDateTime;
  * 2023/7/29 - 21 : 54
  *
  * 自定义切面，实现公共属性字段的自动填充处理逻辑
+ * 在账号登录管理端后可以对员工 Employee、分类 Category 做修改，而一修改，这两个实体类的公共属性都要修改
+ * createTime、createUser、updateTime、updateUser    所以我们想说统一用切面做处理，这样就避免了重复代码，当我们创建员工、创建分类时
+ * 都要修改这4个属性，所以我们对mapper中的insert和update相关方法添加了自定义注解 @AutoFill，只要有这个注解的就触发该切面，统一对这4个属性处理
  *
  **/
 

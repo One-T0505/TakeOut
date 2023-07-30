@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  **/
 
 
-@Target(ElementType.METHOD)
+@Target(ElementType.METHOD)  // 只能标记在方法上
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AutoFill {
     OperationType value();
