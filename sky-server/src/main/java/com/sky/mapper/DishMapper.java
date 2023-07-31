@@ -54,4 +54,12 @@ public interface DishMapper {
      */
     @Delete("delete from dish where id = #{id}")
     void deleteById(Long id);
+
+
+    /**
+     * 修改数据库中dish的值,形参中不为空的值都是需要修改的，所以需要动态sql
+     * @param dish
+     * @return
+     */
+    void update(Dish dish);
 }
