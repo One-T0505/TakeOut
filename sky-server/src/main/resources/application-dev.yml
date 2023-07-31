@@ -11,3 +11,8 @@ sky:
     access-key-secret: ODkPz7s4ZPYrELKxK869fyosygESlv
     bucket-name: ymy-take-out
     endpoint: oss-cn-wulanchabu.aliyuncs.com
+  redis:
+    host: localhost
+    port: 6379
+    password: ymy19990505..
+    database: 6
