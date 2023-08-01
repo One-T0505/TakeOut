@@ -34,7 +34,7 @@
     </select>
 
 
-    <update id="update">
+    <update id="update" parameterType="com.sky.entity.Setmeal">
         update setmeal
         <set>
             <if test="categoryId != null">
@@ -55,14 +55,8 @@
             <if test="image != null">
                 image = #{image},
             </if>
-            <if test="createTime != null">
-                create_time = #{createTime},
-            </if>
             <if test="updateTime != null">
                 update_time = #{updateTime},
-            </if>
-            <if test="createUser != null">
-                create_user = #{createUser}
             </if>
             <if test="updateUser != null">
                 update_user = #{updateUser}
