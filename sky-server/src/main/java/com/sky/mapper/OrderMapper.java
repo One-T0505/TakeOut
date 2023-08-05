@@ -70,4 +70,7 @@ public interface OrderMapper {
 
     // 根据动态条件统计营业额数据
     Double sumByMap(HashMap<String, Object> map);
+
+    // 根据动态条件统计订单数量
+    Integer countByMap(HashMap<String, Object> map);
 }
