@@ -14,7 +14,7 @@
                 #{tablewareNumber}, #{tablewareStatus})
     </insert>
 
-    <update id="update" parameterType="com.sky.entity.Orders">
+     <update id="update" parameterType="com.sky.entity.Orders">
         update orders
         <set>
             <if test="cancelReason != null and cancelReason!='' ">
