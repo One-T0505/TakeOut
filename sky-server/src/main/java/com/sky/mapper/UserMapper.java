@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Map;
+
 /**
  * ymy
  * 2023/8/1 - 11 : 47
@@ -29,4 +31,11 @@ public interface UserMapper {
     * */
     @Select("select * from user where id = #{userId}")
     User getById(Long userId);
+
+
+    /*
+    * 根据动态条件统计用户数量
+     * @param map
+    * */
+    Integer countByMap(Map map);
 }
